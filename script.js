@@ -1950,20 +1950,8 @@ function actualizarContadorCitas(citas) {
         return fechaCita >= hoy && cita.estado !== 'cancelada';
     });
 
-    const badge = document.getElementById('badge-citas');
-    const btnMisCitas = document.getElementById('btn-mis-citas');
-    
-    if (citasProximas.length > 0) {
-        badge.textContent = citasProximas.length;
-        badge.classList.remove('hidden');
-        badge.classList.add('badge-notification');
-        btnMisCitas.classList.remove('hidden');
-    } else {
-        badge.classList.add('hidden');
-        if (citas.length === 0) {
-            btnMisCitas.classList.add('hidden');
-        }
-    }
+    // El badge y botón ya no existen en el navbar, se eliminaron
+    // Las citas solo se acceden desde el menú de usuario
 }
 
 // Actualizar UI cuando el usuario inicia sesión (extender función existente)
@@ -1972,15 +1960,9 @@ if (typeof actualizarUIUsuario !== 'undefined') {
     actualizarUIUsuario = function() {
         _actualizarUIUsuarioOriginal();
         
-        // Mostrar botón "Mis Citas" si hay usuario
-        const btnMisCitas = document.getElementById('btn-mis-citas');
-        if (btnMisCitas) {
-            if (usuarioActual) {
-                btnMisCitas.classList.remove('hidden');
-                cargarCitasUsuario();
-            } else {
-                btnMisCitas.classList.add('hidden');
-            }
+        // Cargar citas del usuario cuando inicia sesión
+        if (usuarioActual) {
+            cargarCitasUsuario();
         }
     };
 }
