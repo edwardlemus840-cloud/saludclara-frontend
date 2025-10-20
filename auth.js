@@ -2,7 +2,11 @@
 // SISTEMA DE AUTENTICACIÓN
 // ============================================
 
-const API_URL = 'http://localhost:3000';
+// Detectar automáticamente si estamos en desarrollo o producción
+const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:3000'
+    : 'https://tu-backend-render.onrender.com'; // ⚠️ CAMBIAR por tu URL de Render
+
 const GOOGLE_CLIENT_ID = ''; // Se configurará desde el backend
 
 // Estado de autenticación

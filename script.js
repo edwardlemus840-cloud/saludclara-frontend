@@ -1,5 +1,9 @@
 // ===== VARIABLES GLOBALES =====
-const API_URL = 'http://localhost:3000'; // URL de tu backend
+// Detectar automáticamente si estamos en desarrollo o producción
+const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:3000'
+    : 'https://tu-backend-render.onrender.com'; // ⚠️ CAMBIAR por tu URL de Render
+
 let conversationHistory = [];
 
 // ===== INICIALIZACIÓN =====
@@ -48,7 +52,7 @@ async function verificarBackend() {
             }
         }
     } catch (error) {
-        mostrarEstadoAPI('❌ No se pudo conectar al backend. Asegúrate de que esté corriendo en http://localhost:3000', 'error');
+        mostrarEstadoAPI(`❌ No se pudo conectar al backend en ${API_URL}`, 'error');
         console.error('Error de conexión:', error);
     }
 }
@@ -396,7 +400,7 @@ async function reservarCita() {
     // GUARDAR EN BASE DE DATOS
     if (usuarioActual && usuarioActual.token) {
         try {
-            const response = await fetch('http://localhost:3000/api/citas', {
+            const response = await fetch(`${API_URL}/api/citas`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -920,7 +924,7 @@ async function handleLoginLocal(event) {
     const password = document.getElementById('login-password').value;
     
     try {
-        const response = await fetch('http://localhost:3000/api/auth/login', {
+        const response = await fetch(`${API_URL}/api/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
@@ -977,7 +981,7 @@ async function handleRegistroLocal(event) {
     }
     
     try {
-        const response = await fetch('http://localhost:3000/api/auth/registro', {
+        const response = await fetch(`${API_URL}/api/auth/registro`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ nombre, email, telefono, password })
@@ -1460,7 +1464,7 @@ async function cargarCitasUsuario() {
         return;
     }
 
-    const url = `http://localhost:3000/api/citas/usuario/${usuarioActual.id}`;
+    const url = `${API_URL}/api/citas/usuario/${usuarioActual.id}`;
     console.log('🔍 Cargando citas desde:', url);
     console.log('👤 Usuario ID:', usuarioActual.id);
     console.log('🔑 Token:', usuarioActual.token ? 'Presente' : 'Ausente');
@@ -1685,7 +1689,7 @@ async function cancelarCita(codigo) {
     console.log('🗑️ Cancelando cita:', codigo);
 
     try {
-        const response = await fetch(`http://localhost:3000/api/citas/${codigo}/cancelar`, {
+        const response = await fetch(`${API_URL}/api/citas/${codigo}/cancelar`, {
             method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${usuarioActual.token}`,
