@@ -1,0 +1,396 @@
+/* ===== ESTILOS GENERALES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+/* ===== EFECTOS DE VIDRIO (GLASSMORPHISM) ===== */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== GRADIENTES MÉDICOS ===== */
+.gradient-text {
+    background: linear-gradient(135deg, #0066CC 0%, #00A86B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ===== BOTONES PROFESIONALES ===== */
+.btn-primary {
+    background: linear-gradient(135deg, #0066CC 0%, #004C99 100%);
+    color: white;
+    padding: 12px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.5);
+    background: linear-gradient(135deg, #004C99 0%, #003366 100%);
+}
+
+.btn-secondary {
+    background: white;
+    color: #0066CC;
+    padding: 12px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    border: 2px solid #0066CC;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: #0066CC;
+    transform: translateY(-2px);
+}
+
+.suggestion-btn {
+    padding: 8px 16px;
+    background: rgba(0, 102, 204, 0.1);
+    border: 2px solid rgba(0, 102, 204, 0.3);
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.suggestion-btn:hover {
+    background: rgba(0, 102, 204, 0.2);
+    border-color: rgba(0, 102, 204, 0.5);
+    transform: translateY(-1px);
+}
+
+/* ===== NAVEGACIÓN ===== */
+.nav-link {
+    color: #2C3E50;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 16px;
+}
+
+.nav-link:hover {
+    color: #0066CC;
+}
+
+/* ===== TARJETAS ===== */
+.feature-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== CHAT ===== */
+.chat-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #667eea, #764ba2);
+    border-radius: 10px;
+}
+
+.chat-message {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== MODAL ===== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ===== SECCIONES ===== */
+.seccion {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.seccion.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== TYPING INDICATOR ===== */
+.typing-indicator {
+    display: inline-flex;
+    gap: 4px;
+    padding: 10px;
+}
+
+.typing-indicator span {
+    width: 8px;
+    height: 8px;
+    background: #667eea;
+    border-radius: 50%;
+    animation: typing 1.4s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 60%, 100% {
+        transform: translateY(0);
+    }
+    30% {
+        transform: translateY(-10px);
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .feature-card {
+        margin-bottom: 20px;
+    }
+}
+
+/* ===== ESTILOS PARA BOTÓN DE GOOGLE ===== */
+.g_id_signin {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.g_id_signin iframe {
+    border-radius: 20px !important;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.15), 0 2px 8px rgba(20, 184, 166, 0.1) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border: 2px solid rgba(37, 99, 235, 0.1) !important;
+}
+
+.g_id_signin iframe:hover {
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.25), 0 4px 12px rgba(20, 184, 166, 0.2) !important;
+    transform: translateY(-3px) scale(1.02) !important;
+    border-color: rgba(20, 184, 166, 0.3) !important;
+}
+
+/* ===== ESTILOS PARA MAPA ===== */
+.filter-btn {
+    padding: 10px 20px;
+    background: white;
+    border: 2px solid #E5E7EB;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #4B5563;
+}
+
+.filter-btn:hover {
+    background: #F3F4F6;
+    border-color: #0066CC;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, #0066CC 0%, #004C99 100%);
+    color: white;
+    border-color: #0066CC;
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.4);
+}
+
+#mapa {
+    z-index: 1;
+}
+
+.custom-marker {
+    background: transparent;
+    border: none;
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.leaflet-popup-content {
+    margin: 12px;
+}
+
+/* ===== ESTILOS PARA FILTROS DE CITAS ===== */
+.filtro-cita-btn {
+    background: white;
+    border: 2px solid #E5E7EB;
+    color: #6B7280;
+    transition: all 0.3s ease;
+}
+
+.filtro-cita-btn:hover {
+    background: #F3F4F6;
+    border-color: #9333EA;
+    color: #9333EA;
+    transform: translateY(-2px);
+}
+
+.filtro-cita-btn.active {
+    background: linear-gradient(135deg, #9333EA 0%, #EC4899 100%);
+    color: white;
+    border-color: #9333EA;
+    box-shadow: 0 4px 15px rgba(147, 51, 234, 0.4);
+}
+
+/* ===== TARJETAS DE CITAS ===== */
+.cita-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    border-left: 4px solid;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.cita-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.cita-card.proxima {
+    border-left-color: #10B981;
+    background: linear-gradient(to right, #F0FDF4 0%, white 10%);
+}
+
+.cita-card.pasada {
+    border-left-color: #6B7280;
+    background: linear-gradient(to right, #F9FAFB 0%, white 10%);
+}
+
+.cita-card.cancelada {
+    border-left-color: #EF4444;
+    background: linear-gradient(to right, #FEF2F2 0%, white 10%);
+}
+
+.cita-card.hoy {
+    border-left-color: #F59E0B;
+    background: linear-gradient(to right, #FFFBEB 0%, white 10%);
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.2);
+}
+
+/* ===== BADGE DE NOTIFICACIONES ===== */
+.badge-notification {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* ===== ESTILOS PARA IMPRESIÓN ===== */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    
+    #comprobante-contenido, #comprobante-contenido * {
+        visibility: visible;
+    }
+    
+    #comprobante-contenido {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    
+    .no-print {
+        display: none !important;
+    }
+    
+    header, footer {
+        display: none !important;
+    }
+}
