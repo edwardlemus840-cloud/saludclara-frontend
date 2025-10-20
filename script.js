@@ -893,22 +893,24 @@ function cerrarModalAuth() {
 }
 
 // ============================================
-// SISTEMA DE TABS (2 TABS)
+// SISTEMA DE TABS (2 TABS) - MEJORADO
 // ============================================
 function cambiarTab(tab) {
-    // Actualizar tabs
+    // Actualizar tabs con nuevo diseño
     const tabs = ['login', 'registro'];
     tabs.forEach(t => {
         const tabBtn = document.getElementById(`tab-${t}`);
         const content = document.getElementById(`content-${t}`);
         
         if (t === tab) {
-            tabBtn.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
-            tabBtn.classList.remove('text-gray-500');
+            // Tab activo
+            tabBtn.classList.add('text-blue-600', 'bg-white', 'border-b-4', 'border-blue-600', 'font-bold');
+            tabBtn.classList.remove('text-gray-500', 'font-semibold', 'hover:bg-gray-100');
             content.classList.remove('hidden');
         } else {
-            tabBtn.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
-            tabBtn.classList.add('text-gray-500');
+            // Tab inactivo
+            tabBtn.classList.remove('text-blue-600', 'bg-white', 'border-b-4', 'border-blue-600', 'font-bold');
+            tabBtn.classList.add('text-gray-500', 'font-semibold', 'hover:bg-gray-100');
             content.classList.add('hidden');
         }
     });
