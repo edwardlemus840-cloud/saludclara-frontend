@@ -369,6 +369,20 @@ body {
     }
 }
 
+/* ===== ESTILOS PARA MARCADORES DEL MAPA DE CITAS ===== */
+.custom-marker-cita {
+    background: transparent;
+    border: none;
+}
+
+.custom-marker-cita .marker-container:hover .marker-label {
+    opacity: 1 !important;
+}
+
+.custom-marker-cita .marker-container:hover .marker-pin {
+    transform: rotate(-45deg) scale(1.1) !important;
+}
+
 /* ===== ESTILOS PARA IMPRESIÓN ===== */
 @media print {
     body * {

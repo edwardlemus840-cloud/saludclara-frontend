@@ -1313,26 +1313,157 @@ const lugaresAtencion = [
     { nombre: 'Clínica Médica Santa Lucía', lat: 13.6911, lng: -89.2567, tipo: 'Clínica', direccion: 'Santa Tecla' }
 ];
 
+// Variable global para el mapa de citas
+let mapaCita = null;
+let marcadoresCita = [];
+
 function actualizarTipoCita() {
     const tipo = document.getElementById('cita-tipo').value;
-    const contenedorLugar = document.getElementById('contenedor-lugar');
+    const contenedorMapaCita = document.getElementById('contenedor-mapa-cita');
+    
+    // Verificar que el contenedor existe
+    if (!contenedorMapaCita) {
+        console.error('❌ No se encontró el contenedor del mapa. Asegúrate de recargar la página.');
+        return;
+    }
     
     if (tipo === 'presencial') {
-        contenedorLugar.classList.remove('hidden');
-        document.getElementById('cita-lugar').required = true;
-        document.getElementById('cita-lugar').value = ''; // Limpiar el campo
+        // Mostrar el mini mapa
+        contenedorMapaCita.classList.remove('hidden');
+        const inputLugar = document.getElementById('cita-lugar');
+        if (inputLugar) {
+            inputLugar.required = true;
+            inputLugar.value = ''; // Limpiar el campo
+        }
         lugarSeleccionado = null; // Resetear selección
+        
+        // Inicializar el mini mapa después de un pequeño delay para que el contenedor esté visible
+        setTimeout(() => {
+            inicializarMapaCita();
+        }, 100);
     } else if (tipo === 'virtual') {
-        contenedorLugar.classList.add('hidden');
-        document.getElementById('cita-lugar').required = false;
-        document.getElementById('cita-lugar').value = 'Videollamada en línea';
+        contenedorMapaCita.classList.add('hidden');
+        const inputLugar = document.getElementById('cita-lugar');
+        if (inputLugar) {
+            inputLugar.required = false;
+            inputLugar.value = 'Videollamada en línea';
+        }
         lugarSeleccionado = { nombre: 'Videollamada en línea', direccion: 'Plataforma virtual' };
     } else {
         // Si no hay tipo seleccionado
-        contenedorLugar.classList.add('hidden');
-        document.getElementById('cita-lugar').value = '';
+        contenedorMapaCita.classList.add('hidden');
+        const inputLugar = document.getElementById('cita-lugar');
+        if (inputLugar) {
+            inputLugar.value = '';
+        }
         lugarSeleccionado = null;
     }
+}
+
+function inicializarMapaCita() {
+    console.log('🗺️ Inicializando mapa de citas...');
+    
+    // Si el mapa ya existe, solo actualizarlo
+    if (mapaCita !== null) {
+        console.log('✅ Mapa ya existe, actualizando tamaño...');
+        mapaCita.invalidateSize();
+        return;
+    }
+    
+    // Verificar que el contenedor existe
+    const contenedor = document.getElementById('mapa-cita');
+    if (!contenedor) {
+        console.error('❌ No se encontró el contenedor del mapa');
+        return;
+    }
+    
+    console.log('📍 Creando mapa...');
+    
+    try {
+        // Crear el mapa centrado en El Salvador
+        mapaCita = L.map('mapa-cita').setView([13.6929, -89.2182], 9);
+        console.log('✅ Mapa creado exitosamente');
+    } catch (error) {
+        console.error('❌ Error al crear mapa:', error);
+        return;
+    }
+    
+    // Agregar capa de OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+        maxZoom: 18
+    }).addTo(mapaCita);
+    
+    // Agregar marcadores de hospitales y clínicas
+    ubicacionesMedicas.forEach(ubicacion => {
+        // Definir color del marcador según tipo
+        let iconColor = '#3B82F6'; // Azul por defecto
+        let iconHtml = '🏥';
+        
+        if (ubicacion.tipo === 'hospital') {
+            iconColor = '#DC2626'; // Rojo
+            iconHtml = '🏥';
+        } else if (ubicacion.tipo === 'clinica') {
+            iconColor = '#10B981'; // Verde
+            iconHtml = '🏥';
+        } else if (ubicacion.tipo === 'centro-salud') {
+            iconColor = '#F59E0B'; // Naranja
+            iconHtml = '⚕️';
+        }
+        
+        // Crear icono personalizado con nombre que aparece al hacer hover
+        const customIcon = L.divIcon({
+            className: 'custom-marker-cita',
+            html: `
+                <div class="marker-container" style="position: relative; display: flex; flex-direction: column; align-items: center;">
+                    <div class="marker-label" style="position: absolute; bottom: 45px; background-color: white; padding: 6px 10px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); white-space: nowrap; opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 1000;">
+                        <span style="font-size: 12px; font-weight: bold; color: ${iconColor};">${ubicacion.nombre}</span>
+                    </div>
+                    <div class="marker-pin" style="background-color: ${iconColor}; width: 40px; height: 40px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); display: flex; align-items: center; justify-content: center; border: 3px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.4); cursor: pointer; transition: transform 0.2s;">
+                        <span style="transform: rotate(45deg); font-size: 20px;">${iconHtml}</span>
+                    </div>
+                </div>
+            `,
+            iconSize: [40, 40],
+            iconAnchor: [20, 40],
+            popupAnchor: [0, -40]
+        });
+        
+        // Crear marcador
+        const marcador = L.marker([ubicacion.lat, ubicacion.lng], { icon: customIcon })
+            .addTo(mapaCita)
+            .bindPopup(`
+                <div style="min-width: 200px;">
+                    <h3 style="font-weight: bold; font-size: 16px; margin-bottom: 8px; color: #1F2937;">${ubicacion.nombre}</h3>
+                    <p style="margin: 4px 0; color: #6B7280;"><strong>📍 Ciudad:</strong> ${ubicacion.ciudad}</p>
+                    <p style="margin: 4px 0; color: #6B7280;"><strong>📞 Teléfono:</strong> ${ubicacion.telefono}</p>
+                    <p style="margin: 4px 0; color: #6B7280;"><strong>⚕️ Especialidades:</strong> ${ubicacion.especialidades}</p>
+                    <button onclick="seleccionarLugarCita('${ubicacion.nombre}')" style="margin-top: 8px; width: 100%; padding: 8px; background: ${iconColor}; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">
+                        Seleccionar este lugar
+                    </button>
+                </div>
+            `);
+        
+        // Al hacer clic en el marcador, seleccionar el lugar
+        marcador.on('click', function() {
+            seleccionarLugarCita(ubicacion.nombre);
+            marcador.openPopup();
+        });
+        
+        marcadoresCita.push(marcador);
+    });
+}
+
+function seleccionarLugarCita(nombreLugar) {
+    document.getElementById('cita-lugar').value = nombreLugar;
+    lugarSeleccionado = { nombre: nombreLugar };
+    
+    // Mostrar feedback visual
+    const inputLugar = document.getElementById('cita-lugar');
+    inputLugar.classList.add('ring-4', 'ring-green-200');
+    setTimeout(() => {
+        inputLugar.classList.remove('ring-4', 'ring-green-200');
+    }, 1000);
 }
 
 function mostrarMapaSeleccion() {

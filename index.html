@@ -571,26 +571,30 @@
                                         <option value="presencial">🏥 Presencial</option>
                                     </select>
                                 </div>
-                                <div id="contenedor-lugar">
-                                    <label class="block text-gray-700 font-semibold mb-2">Lugar de atención *</label>
-                                    <input type="text" id="cita-lugar" readonly required class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl bg-gray-50 cursor-pointer hover:bg-gray-100 transition" placeholder="Selecciona en el mapa..." onclick="mostrarMapaSeleccion()"/>
-                                    <p class="text-xs text-gray-500 mt-1">Haz clic para ver el mapa y seleccionar</p>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">Especialidad *</label>
+                                    <select id="cita-especialidad" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 transition">
+                                        <option value="">Seleccionar...</option>
+                                        <option value="medicina-general">Medicina General</option>
+                                        <option value="cardiologia">Cardiología</option>
+                                        <option value="dermatologia">Dermatología</option>
+                                        <option value="pediatria">Pediatría</option>
+                                        <option value="ginecologia">Ginecología</option>
+                                        <option value="traumatologia">Traumatología</option>
+                                        <option value="psicologia">Psicología</option>
+                                        <option value="nutricion">Nutrición</option>
+                                    </select>
                                 </div>
                             </div>
                             
-                            <div>
-                                <label class="block text-gray-700 font-semibold mb-2">Especialidad *</label>
-                                <select id="cita-especialidad" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 transition">
-                                    <option value="">Seleccionar...</option>
-                                    <option value="medicina-general">Medicina General</option>
-                                    <option value="cardiologia">Cardiología</option>
-                                    <option value="dermatologia">Dermatología</option>
-                                    <option value="pediatria">Pediatría</option>
-                                    <option value="ginecologia">Ginecología</option>
-                                    <option value="traumatologia">Traumatología</option>
-                                    <option value="psicologia">Psicología</option>
-                                    <option value="nutricion">Nutrición</option>
-                                </select>
+                            <!-- Mini Mapa Integrado (solo para citas presenciales) -->
+                            <div id="contenedor-mapa-cita" class="hidden">
+                                <label class="block text-gray-700 font-semibold mb-2">🗺️ Selecciona el lugar de atención *</label>
+                                <div class="border-2 border-gray-300 rounded-xl overflow-hidden mb-2">
+                                    <div id="mapa-cita" class="w-full h-80"></div>
+                                </div>
+                                <input type="text" id="cita-lugar" readonly required class="w-full px-4 py-3 border-2 border-blue-300 rounded-xl bg-blue-50 font-semibold text-blue-800" placeholder="Haz clic en un marcador del mapa"/>
+                                <p class="text-xs text-gray-500 mt-1">👆 Haz clic en cualquier hospital o clínica del mapa para seleccionarlo</p>
                             </div>
                             
                             <button type="button" onclick="siguientePasoCita(2)" class="btn-primary w-full py-4 text-lg rounded-xl">
