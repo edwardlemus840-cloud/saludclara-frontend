@@ -425,66 +425,66 @@
 
         <!-- DIAGNÓSTICO -->
         <section id="seccion-diagnostico" class="seccion hidden">
-            <button onclick="mostrarSeccion('inicio')" class="text-purple-600 mb-6 flex items-center">← Volver</button>
-            <div class="glass-effect rounded-3xl p-8 shadow-2xl max-w-4xl mx-auto">
-                <div class="text-center mb-8">
-                    <div class="inline-block p-4 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl mb-4">
-                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button onclick="mostrarSeccion('inicio')" class="text-purple-600 mb-4 md:mb-6 flex items-center px-4 md:px-0">← Volver</button>
+            <div class="glass-effect rounded-2xl md:rounded-3xl p-4 md:p-8 shadow-2xl max-w-4xl mx-auto">
+                <div class="text-center mb-6 md:mb-8">
+                    <div class="inline-block p-3 md:p-4 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl md:rounded-2xl mb-3 md:mb-4">
+                        <svg class="w-10 h-10 md:w-12 md:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
                         </svg>
                     </div>
-                    <h2 class="text-3xl font-bold text-gray-800 mb-2">🤖 Asistente de Diagnóstico</h2>
-                    <p class="text-gray-600">Describe tus síntomas</p>
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">🤖 Asistente de Diagnóstico</h2>
+                    <p class="text-sm md:text-base text-gray-600">Describe tus síntomas</p>
                     
                     <!-- Advertencia Médica Destacada -->
-                    <div class="mt-4 bg-gradient-to-r from-red-50 to-orange-50 border-2 border-red-300 rounded-xl p-4 max-w-2xl mx-auto">
+                    <div class="mt-4 bg-gradient-to-r from-red-50 to-orange-50 border-2 border-red-300 rounded-lg md:rounded-xl p-3 md:p-4 max-w-2xl mx-auto">
                         <div class="flex items-start">
-                            <svg class="w-6 h-6 text-red-600 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 text-red-600 mr-2 md:mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
                             </svg>
-                            <div>
-                                <p class="text-sm font-bold text-red-800 mb-1">⚠️ ADVERTENCIA IMPORTANTE</p>
-                                <p class="text-xs text-red-700">Este asistente <strong>NO reemplaza</strong> el diagnóstico de un médico profesional. La información proporcionada es solo orientativa. Si tienes síntomas graves o dudas, <strong>consulta a un médico inmediatamente</strong>.</p>
+                            <div class="text-left">
+                                <p class="text-xs md:text-sm font-bold text-red-800 mb-1">⚠️ ADVERTENCIA</p>
+                                <p class="text-xs text-red-700">Este asistente <strong>NO reemplaza</strong> el diagnóstico de un médico profesional. Si tienes síntomas graves, <strong>consulta a un médico</strong>.</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div id="chat-container" class="chat-container bg-gradient-to-br from-gray-50 to-purple-50 rounded-2xl p-6 mb-6 min-h-[400px] max-h-[500px] overflow-y-auto">
+                <div id="chat-container" class="chat-container bg-gradient-to-br from-gray-50 to-purple-50 rounded-xl md:rounded-2xl p-3 md:p-6 mb-4 md:mb-6 min-h-[300px] md:min-h-[400px] max-h-[400px] md:max-h-[500px] overflow-y-auto">
                     <div class="chat-message mb-4">
                         <div class="flex items-start">
-                            <div class="bg-gradient-to-br from-purple-500 to-pink-500 text-white p-3 rounded-2xl mr-3 shadow-lg">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                            <div class="bg-gradient-to-br from-purple-500 to-pink-500 text-white p-2 md:p-3 rounded-xl md:rounded-2xl mr-2 md:mr-3 shadow-lg flex-shrink-0">
+                                <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/>
                                 </svg>
                             </div>
-                            <div class="bg-white rounded-2xl shadow-md p-5 max-w-md">
-                                <p class="text-gray-800 font-medium mb-2">¡Hola! 👋 Soy tu asistente médico con IA.</p>
-                                <p class="text-gray-600 text-sm mb-3">Ejemplos:</p>
-                                <ul class="text-sm text-gray-600 space-y-2">
+                            <div class="bg-white rounded-xl md:rounded-2xl shadow-md p-3 md:p-5 max-w-[85%] md:max-w-md">
+                                <p class="text-sm md:text-base text-gray-800 font-medium mb-2">¡Hola! 👋 Soy tu asistente médico con IA.</p>
+                                <p class="text-xs md:text-sm text-gray-600 mb-2 md:mb-3">Ejemplos:</p>
+                                <ul class="text-xs md:text-sm text-gray-600 space-y-1 md:space-y-2">
                                     <li>• "Tengo dolor de cabeza y fiebre"</li>
                                     <li>• "Me duele la garganta al tragar"</li>
                                     <li>• "Tengo tos seca hace 3 días"</li>
                                 </ul>
-                                <p class="text-xs text-gray-500 mt-3">⚠️ No reemplazo diagnóstico médico</p>
+                                <p class="text-xs text-gray-500 mt-2 md:mt-3">⚠️ No reemplazo diagnóstico médico</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="flex gap-3">
-                    <input type="text" id="chat-input" placeholder="Describe tus síntomas..." class="flex-1 px-5 py-4 border-2 rounded-xl focus:outline-none focus:border-purple-500" onkeypress="if(event.key==='Enter') enviarMensaje()"/>
-                    <button onclick="enviarMensaje()" class="btn-primary px-8 py-4 rounded-xl">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex gap-2 md:gap-3">
+                    <input type="text" id="chat-input" placeholder="Describe tus síntomas..." class="flex-1 px-3 md:px-5 py-3 md:py-4 text-sm md:text-base border-2 rounded-lg md:rounded-xl focus:outline-none focus:border-purple-500" onkeypress="if(event.key==='Enter') enviarMensaje()"/>
+                    <button onclick="enviarMensaje()" class="btn-primary px-4 md:px-8 py-3 md:py-4 rounded-lg md:rounded-xl flex-shrink-0">
+                        <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
                         </svg>
                     </button>
                 </div>
                 
-                <div class="mt-4 flex gap-2 flex-wrap">
-                    <button onclick="usarSugerencia('Tengo dolor de cabeza y fiebre')" class="suggestion-btn">Dolor de cabeza</button>
-                    <button onclick="usarSugerencia('Me duele la garganta')" class="suggestion-btn">Dolor de garganta</button>
-                    <button onclick="usarSugerencia('Tengo tos persistente')" class="suggestion-btn">Tos</button>
+                <div class="mt-3 md:mt-4 flex gap-2 flex-wrap">
+                    <button onclick="usarSugerencia('Tengo dolor de cabeza y fiebre')" class="suggestion-btn text-xs md:text-sm">Dolor de cabeza</button>
+                    <button onclick="usarSugerencia('Me duele la garganta')" class="suggestion-btn text-xs md:text-sm">Dolor de garganta</button>
+                    <button onclick="usarSugerencia('Tengo tos persistente')" class="suggestion-btn text-xs md:text-sm">Tos</button>
                 </div>
             </div>
         </section>
