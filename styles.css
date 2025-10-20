@@ -50,6 +50,13 @@ body {
     background: linear-gradient(135deg, #004C99 0%, #003366 100%);
 }
 
+/* Ajuste para botón de enviar en móvil */
+@media (max-width: 768px) {
+    #seccion-diagnostico .btn-primary {
+        padding: 10px 12px !important;
+    }
+}
+
 .btn-secondary {
     background: white;
     color: #0066CC;
