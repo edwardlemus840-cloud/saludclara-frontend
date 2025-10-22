@@ -30,6 +30,15 @@ function mostrarSeccion(seccionId) {
     // Cerrar menú móvil
     document.getElementById('mobile-menu').classList.add('hidden');
     
+    // Controlar visibilidad del chat de Tidio
+    if (typeof window.tidioChatApi !== 'undefined') {
+        if (seccionId === 'inicio') {
+            window.tidioChatApi.show();
+        } else {
+            window.tidioChatApi.hide();
+        }
+    }
+    
     // Scroll al top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
