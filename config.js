@@ -2,7 +2,7 @@
 // CONFIGURACIÓN DE LA APLICACIÓN
 // ============================================
 
-// ✅ URL del backend en Render
+
 const BACKEND_URL_PRODUCCION = 'https://saludclara-backend.onrender.com';
 
 // Detectar automáticamente si estamos en desarrollo o producción

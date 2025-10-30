@@ -56,6 +56,13 @@ body {
         padding: 8px 10px !important;
         min-width: auto !important;
     }
+    
+    /* Botón de enviar en el chat - mantener tamaño compacto */
+    #seccion-diagnostico .flex.gap-2 .btn-primary,
+    #seccion-diagnostico .flex.gap-3 .btn-primary {
+        width: auto !important;
+        padding: 10px 12px !important;
+    }
 }
 
 .btn-secondary {
